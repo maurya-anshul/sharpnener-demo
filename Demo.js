@@ -47,7 +47,7 @@ div.append(text);
 var container=document.querySelector('.list-group');
 var h2=document.querySelector('.list-group-item');
 container.insertBefore(div,h2);
-*/
+
 
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
@@ -120,3 +120,28 @@ function filterItems(e){
     }
   });
 }
+
+*/
+
+
+let submitbtn=document.getElementById('submit')
+let resetbtn=document.getElementById('reset')
+let form=document.getElementById('form')
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+});
+resetbtn.addEventListener('click', (e)=>{
+    let name=document.getElementById('name')
+    let email=document.getElementById('email')
+    name.value='';
+    email.value='';
+});
+
+submitbtn=addEventListener('click', (e)=>{
+    let name=document.getElementById('name')
+    let email=document.getElementById('email')
+    name=name.value;
+    localStorage.setItem('name', name);
+    email=email.value;
+    localStorage.setItem('email',email);
+})
