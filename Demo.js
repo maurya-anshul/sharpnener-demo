@@ -137,11 +137,11 @@ resetbtn.addEventListener('click', (e)=>{
     email.value='';
 });
 
-submitbtn=addEventListener('click', (e)=>{
+submitbtn.addEventListener('click', (e)=>{
     let name=document.getElementById('name')
     let email=document.getElementById('email')
     name=name.value;
     localStorage.setItem('name', name);
     email=email.value;
     localStorage.setItem('email',email);
-})
+});
