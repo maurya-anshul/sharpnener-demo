@@ -141,7 +141,12 @@ submitbtn.addEventListener('click', (e)=>{
     let name=document.getElementById('name')
     let email=document.getElementById('email')
     name=name.value;
-    localStorage.setItem('name', name);
     email=email.value;
-    localStorage.setItem('email',email);
+    let user_record=new Array();
+    user_record=JSON.parse(localStorage.getItem("user"))?JSON.parse(localStorage.getItem("user")):[]
+    user_record.push({
+        "name":name,
+        "email":email
+    })
+    localStorage.setItem('user', JSON.stringify(user_record));
 });
