@@ -124,29 +124,99 @@ function filterItems(e){
 */
 
 
-let submitbtn=document.getElementById('submit')
-let resetbtn=document.getElementById('reset')
-let form=document.getElementById('form')
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-});
-resetbtn.addEventListener('click', (e)=>{
-    let name=document.getElementById('name')
-    let email=document.getElementById('email')
-    name.value='';
-    email.value='';
+
+
+
+
+// let submitbtn=document.getElementById('submit')
+// let resetbtn=document.getElementById('reset')
+// let form=document.getElementById('form')
+// form.addEventListener('submit', (e)=>{
+//     e.preventDefault();
+// });
+// resetbtn.addEventListener('click', (e)=>{
+//     let name=document.getElementById('name')
+//     let email=document.getElementById('email')
+//     name.value='';
+//     email.value='';
+// });
+
+// submitbtn.addEventListener('click', (e)=>{
+//     let name=document.getElementById('name')
+//     let email=document.getElementById('email')
+//     name=name.value;
+//     email=email.value;
+//     let user_record=new Array();
+//     user_record=JSON.parse(localStorage.getItem("user"))?JSON.parse(localStorage.getItem("user")):[]
+//     user_record.push({
+//         "name":name,
+//         "email":email
+//     })
+//     localStorage.setItem('user', JSON.stringify(user_record));
+// });
+// function list(){
+//   document.getElementById('main').innerHTML="user_record"+user_record;
+// }
+
+// function showData(){
+//   let mainUl=document.getElementById('listOfUsers')
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+let form=document.querySelector("form");
+let main=document.querySelector(".main")
+form.addEventListener("submit",(event)=>{
+  let name=event.target.name.value;
+  let email=event.target.email.value;
+  let chekStatus=0;
+  let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
+  for(let v of userData){
+    if(v.email==email){
+      chekStatus=1;
+      break;
+    }
+  }
+  if(chekStatus==1){
+    alert("Email id already exist")
+  }
+  else{
+  userData.push({
+    'name':name,
+    'email':email
+  })
+}
+  localStorage.setItem("userDetails",JSON.stringify(userData));
+  event.target.reset();
+  displayData();
+  event.preventDefault();
 });
 
-submitbtn.addEventListener('click', (e)=>{
-    let name=document.getElementById('name')
-    let email=document.getElementById('email')
-    name=name.value;
-    email=email.value;
-    let user_record=new Array();
-    user_record=JSON.parse(localStorage.getItem("user"))?JSON.parse(localStorage.getItem("user")):[]
-    user_record.push({
-        "name":name,
-        "email":email
-    })
-    localStorage.setItem('user', JSON.stringify(user_record));
-});
+
+let displayData=()=>{
+  let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
+  let finalData='';
+  userData.forEach((element,i) => {
+    finalData+=`<div class="item">
+    <li>${element.name},${element.email}<button onclick='removeData(${i})'>Remove</button></li>
+    </div>`
+  });
+  main.innerHTML=finalData;
+}
+let removeData=(index)=>{
+  let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
+  userData.splice(index,1);
+  localStorage.setItem("userDetails",JSON.stringify(userData));
+  displayData();
+}
+displayData();
