@@ -208,7 +208,8 @@ let displayData=()=>{
   let finalData='';
   userData.forEach((element,i) => {
     finalData+=`<div class="item">
-    <li>${element.name},${element.email}<button onclick='removeData(${i})'>Remove</button></li>
+    <li>${element.name},${element.email}<button onclick='removeData(${i})'>Remove</button>
+    <button onclick='editData(${i})'>Edit</button></li>
     </div>`
   });
   main.innerHTML=finalData;
@@ -218,5 +219,10 @@ let removeData=(index)=>{
   userData.splice(index,1);
   localStorage.setItem("userDetails",JSON.stringify(userData));
   displayData();
+}
+let editData=(name,email)=>{
+      document.getElementById('name').value=name
+      document.getElementById('email').value=email
+     removeData(email);
 }
 displayData();
