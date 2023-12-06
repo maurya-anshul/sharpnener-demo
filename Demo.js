@@ -6,9 +6,12 @@
 //     list[i].style.fontWeight='bold';
 // }
 
-var list=document.querySelectorAll("li")
-list[1].style.backgroundColor="green"
-list[2].style.display="none"
+// var list=document.querySelectorAll("li")
+// list[1].style.backgroundColor="green"
+// list[2].style.display="none"
+
+
+
 // var li=document.getElementsByTagName('li');
 // li[4].style.backgroundColor='yellow';
 // var item=document.querySelector('.list-group-item:nth-child(2)')
@@ -42,7 +45,6 @@ list[2].style.display="none"
 // div.style.fontSize='30px'
 // container.insertBefore(div,h1);
 // console.log(div);
-
 // var div=document.createElement('div');
 // div.className='Hello';
 // div.id='Hello2';
@@ -53,60 +55,61 @@ list[2].style.display="none"
 // var h2=document.querySelector('.list-group-item');
 // container.insertBefore(div,h2);
 
-// var form = document.getElementById('addForm');
-// var itemList = document.getElementById('items');
-// var filter = document.getElementById('filter');
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+//filter.addEventListener('keyup', filterItems);
 
-// // Form submit event
-// form.addEventListener('submit', addItem);
-// // Delete event
-// itemList.addEventListener('click', removeItem);
-// // Filter event
-// filter.addEventListener('keyup', filterItems);
+// Add item
+function addItem(e){
+  e.preventDefault();
 
-// // Add item
-// function addItem(e){
-//   e.preventDefault();
+  // Get input value
+  var newItem = document.getElementById('item').value;
+  // var newItem2 = document.getElementById('description').value;
 
-//   // Get input value
-//   var newItem = document.getElementById('item').value;
-//   var newItem2 = document.getElementById('description').value;
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
 
-//   // Create new li element
-//   var li = document.createElement('li');
-//   // Add class
-//   li.className = 'list-group-item';
-//   // Add text node with input value
-//   li.appendChild(document.createTextNode(newItem));
-//   itemList.appendChild(li);
-//   li.appendChild(document.createTextNode(newItem2));
-//   itemList.appendChild(li);
+  li.appendChild(document.createTextNode(newItem));
+  itemList.appendChild(li);
+  // li.appendChild(document.createTextNode(newItem2));
+  // itemList.appendChild(li);
 
-//   // Create del button element
-//   var deleteBtn = document.createElement('button');
+  // Create del button element
+  var deleteBtn = document.createElement('button');
+  var editBtn = document.createElement('button');
 
-//   // Add classes to del button
-//   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  editBtn.className = 'edit';
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
+  editBtn.appendChild(document.createTextNode('EDIT'));
+  // Append button to li
+  li.appendChild(deleteBtn);
+  li.appendChild(editBtn);
 
-//   // Append text node
-//   deleteBtn.appendChild(document.createTextNode('X'));
-
-//   // Append button to li
-//   li.appendChild(deleteBtn);
-
-//   // Append li to list
-//   itemList.appendChild(li);
-// }
-
-// // Remove item
-// function removeItem(e){
-//   if(e.target.classList.contains('delete')){
-//     if(confirm('Are You Sure?')){
-//       var li = e.target.parentElement;
-//       itemList.removeChild(li);
-//     }
-//   }
-// }
+  // Append li to list
+  itemList.appendChild(li);
+}
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
 
 // // Filter Items
 // function filterItems(e){
