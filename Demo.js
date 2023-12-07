@@ -55,73 +55,73 @@
 // var h2=document.querySelector('.list-group-item');
 // container.insertBefore(div,h2);
 
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-var filter = document.getElementById('filter');
-// Form submit event
-form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
-// Filter event
-filter.addEventListener('keyup', filterItems);
+// var form = document.getElementById('addForm');
+// var itemList = document.getElementById('items');
+// var filter = document.getElementById('filter');
+// // Form submit event
+// form.addEventListener('submit', addItem);
+// // Delete event
+// itemList.addEventListener('click', removeItem);
+// // Filter event
+// filter.addEventListener('keyup', filterItems);
 
-// Add item
-function addItem(e){
-  e.preventDefault();
+// // Add item
+// function addItem(e){
+//   e.preventDefault();
 
-  // Get input value
-  var newItem = document.getElementById('item').value;
-  var newItem2 = document.getElementById('description').value;
+//   // Get input value
+//   var newItem = document.getElementById('item').value;
+//   var newItem2 = document.getElementById('description').value;
 
-  // Create new li element
-  var li = document.createElement('li');
-  // Add class
-  li.className = 'list-group-item';
-  // Add text node with input value
+//   // Create new li element
+//   var li = document.createElement('li');
+//   // Add class
+//   li.className = 'list-group-item';
+//   // Add text node with input value
 
-  li.appendChild(document.createTextNode(newItem));
-  itemList.appendChild(li);
-  li.appendChild(document.createTextNode(newItem2));
-  itemList.appendChild(li);
+//   li.appendChild(document.createTextNode(newItem));
+//   itemList.appendChild(li);
+//   li.appendChild(document.createTextNode(newItem2));
+//   itemList.appendChild(li);
 
-  // Create del button element
-  var deleteBtn = document.createElement('button');
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-  // Append text node
-  deleteBtn.appendChild(document.createTextNode('X'));
-  // Append button to li
-  li.appendChild(deleteBtn);
+//   // Create del button element
+//   var deleteBtn = document.createElement('button');
+//   // Add classes to del button
+//   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+//   // Append text node
+//   deleteBtn.appendChild(document.createTextNode('X'));
+//   // Append button to li
+//   li.appendChild(deleteBtn);
 
-  // Append li to list
-  itemList.appendChild(li);
-}
-// Remove item
-function removeItem(e){
-  if(e.target.classList.contains('delete')){
-    if(confirm('Are You Sure?')){
-      var li = e.target.parentElement;
-      itemList.removeChild(li);
-    }
-  }
-}
+//   // Append li to list
+//   itemList.appendChild(li);
+// }
+// // Remove item
+// function removeItem(e){
+//   if(e.target.classList.contains('delete')){
+//     if(confirm('Are You Sure?')){
+//       var li = e.target.parentElement;
+//       itemList.removeChild(li);
+//     }
+//   }
+// }
 
-// Filter Items
-function filterItems(e){
-  // convert text to lowercase
-  var text = e.target.value.toLowerCase();
-  // Get lis
-  var items = itemList.getElementsByTagName('li');
-  // Convert to an array
-  Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-}
+// // Filter Items
+// function filterItems(e){
+//   // convert text to lowercase
+//   var text = e.target.value.toLowerCase();
+//   // Get lis
+//   var items = itemList.getElementsByTagName('li');
+//   // Convert to an array
+//   Array.from(items).forEach(function(item){
+//     var itemName = item.firstChild.textContent;
+//     if(itemName.toLowerCase().indexOf(text) != -1){
+//       item.style.display = 'block';
+//     } else {
+//       item.style.display = 'none';
+//     }
+//   });
+// }
 
 
 
@@ -173,54 +173,54 @@ function filterItems(e){
 
 
 
-// let form=document.querySelector("form");
-// let main=document.querySelector(".main")
-// form.addEventListener("submit",(event)=>{
-//   let name=event.target.name.value;
-//   let email=event.target.email.value;
-//   let chekStatus=0;
-//   let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
-//   for(let v of userData){
-//     if(v.email==email){
-//       chekStatus=1;
-//       break;
-//     }
-//   }
-//   if(chekStatus==1){
-//     alert("Email id already exist")
-//   }
-//   else{
-//   userData.push({
-//     'name':name,
-//     'email':email
-//   })
-// }
-//   localStorage.setItem("userDetails",JSON.stringify(userData));
-//   event.target.reset();
-//   displayData();
-//   event.preventDefault();
-// });
+let form=document.querySelector("form");
+let main=document.querySelector(".main")
+form.addEventListener("submit",(event)=>{
+  let name=event.target.name.value;
+  let email=event.target.email.value;
+  let chekStatus=0;
+  let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
+  for(let v of userData){
+    if(v.email==email){
+      chekStatus=1;
+      break;
+    }
+  }
+  if(chekStatus==1){
+    alert("Email id already exist")
+  }
+  else{
+  userData.push({
+    'name':name,
+    'email':email
+  })
+}
+  localStorage.setItem("userDetails",JSON.stringify(userData));
+  event.target.reset();
+  displayData();
+  event.preventDefault();
+});
 
 
-// let displayData=()=>{
-//   let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
-//   let finalData='';
-//   userData.forEach((element,i) => {
-//     finalData+=`<div class="item">
-//     <li>${element.name},${element.email}<button onclick='removeData(${i})'>Remove</button>
-//     </div>`
-//   });
-//   main.innerHTML=finalData;
-// }
-// let removeData=(index)=>{
-//   let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
-//   userData.splice(index,1);
-//   localStorage.setItem("userDetails",JSON.stringify(userData));
-//   displayData();
-// }
-// let editData=(name,email)=>{
-//       document.getElementById('name').value=name
-//       document.getElementById('email').value=email
-//      removeData(email);
-//  }
-// displayData();
+let displayData=()=>{
+  let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
+  let finalData='';
+  userData.forEach((element,i) => {
+    finalData+=`<div class="item">
+    <li>${element.name},${element.email}<button onclick='removeData(${i})'>Remove</button>
+    </div>`
+  });
+  main.innerHTML=finalData;
+}
+let removeData=(index)=>{
+  let userData=JSON.parse(localStorage.getItem("userDetails"))??[]
+  userData.splice(index,1);
+  localStorage.setItem("userDetails",JSON.stringify(userData));
+  displayData();
+}
+let editData=(name,email)=>{
+      document.getElementById('name').value=name
+      document.getElementById('email').value=email
+     removeData(email);
+ }
+displayData();
